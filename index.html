@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./images/favicon-32x32.png"
+    />
+    <title>Frontend Mentor | Interactive rating component</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Overpass:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        font-family: "Overpass";
+        margin: 0;
+        transition: all 0.35s;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      p {
+        color: hsl(217, 12%, 63%);
+        margin: 15px 0;
+        line-height: 23px;
+      }
+      h2 {
+        margin: 15px 0;
+        color: hsl(0, 0%, 100%);
+      }
+      body {
+        background-color: hsl(216, 12%, 8%);
+      }
+      .show {
+        display: block;
+      }
+      .main-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin: 20px;
+        align-items: center;
+        height: 90vh;
+      }
+      .hide {
+        display: none;
+      }
+      .rating-card {
+        padding: 25px 35px;
+        margin: 20px;
+        width: 400px;
+        border-radius: 30px;
+        background-color: #1f2630;
+      }
+      .thank-you-card {
+        flex-direction: column;
+        margin: 20px;
+        padding: 25px;
+        width: 400px;
+        text-align: center;
+        border-radius: 30px;
+        background-color: #1f2630;
+      }
+      .rating-btn-container {
+        display: flex;
+        justify-content: space-between;
+      }
+      .btn {
+        outline: none;
+        background-color: #262e39;
+        color: white;
+        border: none;
+        width: 45px;
+        margin: 10px 0;
+        cursor: pointer;
+        height: 45px;
+        border-radius: 50%;
+      }
+      .icon-star {
+        background-color: #262e39;
+        width: 50px;
+        display: flex;
+        margin-bottom: 25px;
+        justify-content: center;
+        align-items: center;
+        height: 50px;
+        border-radius: 50%;
+      }
+      #submit {
+        padding: 15px;
+        margin-top: 20px;
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        background-color: hsl(25, 97%, 53%);
+        border: none;
+        color: #1f2630;
+        font-weight: 700;
+        cursor: pointer;
+        outline: none;
+        border-radius: 30px;
+        width: 100%;
+      }
+      #submit:hover {
+        background-color: white;
+      }
+      .btn:hover {
+        background-color: hsl(25, 97%, 53%);
+      }
+      .rating-messege {
+        background-color: #262f38;
+        color: hsl(25, 97%, 53%);
+        margin: 25px 0;
+        padding: 5px;
+        border-radius: 20px;
+      }
+      .btn:focus {
+        color: #1f2630;
+        background-color: white;
+      }
+      @media (max-width: 450px) {
+        .thank-you-card,
+        .rating-card {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main-container">
+      <div class="rating-card show">
+        <div class="icon-star">
+          <img src="./images/icon-star.svg" alt="" />
+        </div>
+        <h2>How did we do?</h2>
+        <p>
+          Please let us know how we did with your support request. All feedback
+          is appreciated to help us improve our offering!
+        </p>
+        <div class="rating-btn-container">
+          <button id="btn1" class="btn">1</button>
+          <button id="btn2" class="btn">2</button>
+          <button id="btn3" class="btn">3</button>
+          <button id="btn4" class="btn">4</button>
+          <button id="btn5" class="btn">5</button>
+        </div>
+        <div class="submit-rating">
+          <button id="submit">Submit</button>
+        </div>
+      </div>
+      <div class="thank-you-card hide">
+        <img src="./images/illustration-thank-you.svg" alt="" />
+
+        <p class="rating-messege">
+          You selected <span id="rating"></span> out of 5
+        </p>
+        <h2>Thank you!</h2>
+        <p>
+          We appreciate you taking the time to give a rating. If you ever need
+          more support, don’t hesitate to get in touch!
+        </p>
+      </div>
+    </div>
+    <script>
+      const submit = document.querySelector("#submit");
+      const thankYou = document.querySelector(".thank-you-card");
+      const rateCard = document.querySelector(".rating-card");
+      const rating = document.querySelector("#rating");
+      const rating_container = document.querySelector(".rating-btn-container");
+
+      let display = "";
+
+      const submitForm = () => {
+        if (display !== "") {
+          thankYou.classList.add("show");
+          thankYou.classList.remove("hide");
+          rateCard.classList.add("hide");
+          rateCard.classList.remove("show");
+        } else {
+          alert("Please enter rating first");
+        }
+      };
+
+      rating_container.addEventListener("click", (event) => {
+        const value = event.target;
+        if (value.tagName === "BUTTON") {
+          display = value.textContent;
+          rating.textContent = display;
+        }
+      });
+
+      submit.addEventListener("click", submitForm);
+    </script>
+  </body>
+</html>
